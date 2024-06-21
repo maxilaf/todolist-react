@@ -1,12 +1,17 @@
 
-const valeur = [2, 5];
+const valeur = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20];
 
-const [v1, v2] = valeur
+console.log(valeur);
 
-console.log(v1)
-console.log(v2)
+valeur.splice(1, 1);
 
-v1 = 3;
+console.log(valeur);
 
-console.log(v1)
-console.log(v2)
+const prenom = ["Jean", "Pierre", "Max", "Luca", "Henri", "Charles"];
+const index = prenom.indexOf("Max");
+
+if (index !== -1) {
+  prenom.splice(index, 1);
+}
+
+console.log(prenom);
