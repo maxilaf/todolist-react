@@ -19,16 +19,43 @@ function App() {
     //const inputRef = useRef();
 
     // comportements
-    const deleteLi = (tache) => {
+    const deleteTache = (tache) => {
         const copyTaches = [...taches];
         const indexDelete = copyTaches.indexOf(tache);
         copyTaches.splice(indexDelete, 1);
         setTaches(copyTaches);
     };
 
+    const deleteTacheFini = (tache) => {
+        const copyTaches = [...tachesFini];
+        const indexDelete = copyTaches.indexOf(tache);
+        copyTaches.splice(indexDelete, 1);
+        setTachesFini(copyTaches);
+    };
+
     const handleAdd = (newTache) => {
         setTaches([...taches, newTache]);
     };
+
+    const onFait = (tache) => {
+        const copyTachesFini = [...tachesFini];
+        const indexDelete = copyTachesFini.indexOf(tache);
+        copyTachesFini.splice(indexDelete, 1);
+        const changeTache = { nom: tache.nom, fini: false }
+        const copyTaches = [...taches, changeTache];
+        setTaches(copyTaches)
+        setTachesFini(copyTachesFini)
+    }
+
+    const onNonFait = (tache) => {
+        const copyTaches = [...taches];
+        const indexDelete = copyTaches.indexOf(tache);
+        copyTaches.splice(indexDelete, 1);
+        const changeTache = { nom: tache.nom, fini: true }
+        const copyTachesFini = [...tachesFini, changeTache];
+        setTaches(copyTaches)
+        setTachesFini(copyTachesFini)
+    }
 
     // Affichage
 
@@ -43,7 +70,8 @@ function App() {
                         return (
                             <Tache
                                 tache={tache}
-                                onTacheDelete={deleteLi}
+                                onTacheDelete={deleteTache}
+                                onFait={() => onNonFait(tache)}
                                 key={taches.indexOf(tache)}
                             />
                         );
@@ -55,7 +83,12 @@ function App() {
                 <ul>
                     {tachesFini.map((tacheFini) => {
                         return (
-                            <TacheFini />
+                            <Tache
+                                tache={tacheFini}
+                                onTacheDelete={deleteTacheFini}
+                                onFait={() => onFait(tacheFini)}
+                                key={taches.indexOf(tacheFini)}
+                            />
                         );
                     })}
                 </ul>
