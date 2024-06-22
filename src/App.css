@@ -1,4 +1,44 @@
 .App {
-  text-align: center;
+    text-align: center;
+    background-color: #9CC67D;
+    width: 50%;
+    padding: 20px;
+    border: 10px dashed black;
+    border-radius: 40px;
+    margin: auto;
+    margin-top: 30px;
 }
 
+.taches {
+    border: 5px solid black;
+    background-color: #A77DC6;
+    padding: 0px;
+    width: 70%;
+    margin: 50px auto 50px auto;
+    border-radius: 10px;
+}
+
+.taches h2 {
+    border-bottom: 5px solid black;
+    margin: 0px;
+    padding: 5px;
+}
+
+.taches ul {
+    list-style-type: none;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.taches ul li {
+    border: 2px solid black;
+    margin: 0;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+button {
+}

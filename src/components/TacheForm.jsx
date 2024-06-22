@@ -1,7 +1,7 @@
+import "./../styles/TacheForm.css";
 import { useState } from "react";
 
-export default function TacheForm({taches, setTaches}) {
-
+export default function TacheForm({ handleAdd }) {
     // state
     const [nouvelleTache, setNouvelleTache] = useState("");
 
@@ -14,23 +14,24 @@ export default function TacheForm({taches, setTaches}) {
     const addTaches = (event) => {
         event.preventDefault();
         if (nouvelleTache !== "") {
-          const newTaches = { nom: nouvelleTache};
-          setTaches([...taches, newTaches]);
-          setNouvelleTache("");
+            const newTache = { nom: nouvelleTache, fini: false };
+            handleAdd(newTache);
+            //   setTaches([...taches, newTaches]);
+            setNouvelleTache("");
         }
         // const tachesLenght = taches.length + 1;
         // const newTaches = { id: tachesLenght, nom: inputRef.current.value };
         // setTaches([...taches, newTaches]);
         // console.log(taches);
-      };
+    };
 
     return (
         <form action="submit" onSubmit={addTaches}>
             <input
-            value={nouvelleTache}
-            type="text"
-            placeholder="Entrez votre votre tache"
-            onChange={handleChange}
+                value={nouvelleTache}
+                type="text"
+                placeholder="Entrez votre votre tache"
+                onChange={handleChange}
             />
             <button>Ajouter la tache</button>
         </form>

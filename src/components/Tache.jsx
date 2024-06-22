@@ -1,20 +1,15 @@
+import "./../styles/Tache.css";
 
-export default function Tache({ tache, taches, setTaches }) {
+export default function Tache({ tache, onTacheDelete }) {
     // state
 
     // comportements
-    const deleteLi = (tache) => {
-        const copyTaches = [...taches];
-        const indexDelete = copyTaches.indexOf(tache)
-        copyTaches.splice(indexDelete, 1);
-        setTaches(copyTaches);
-    };
 
     // affichage
     return (
-        <li key={taches.indexOf(tache)}>
+        <li>
             <input type="checkbox" />
-            {tache.nom} <button onClick={() => deleteLi(tache)}>X</button>
+            {tache.nom} <button onClick={() => onTacheDelete(tache)}>X</button>
         </li>
     );
 }
