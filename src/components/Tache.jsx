@@ -1,15 +1,20 @@
 import "./../styles/Tache.css";
 
-export default function Tache({ tache, onTacheDelete, checkBox }) {
+export default function Tache({ tache, onTacheDelete, checkBox, estFait }) {
     // state
 
     // comportements
 
     // affichage
     return (
-        <li>
-            {checkBox}
-            {tache.nom}
+        <li className={estFait}>
+            <input
+                type="checkbox"
+                onChange={checkBox.onChange}
+                checked={checkBox.checked}
+            />
+            <label>{tache.nom}</label>
+            {/* {tache.nom} */}
             <button onClick={() => onTacheDelete(tache)}>X</button>
         </li>
     );

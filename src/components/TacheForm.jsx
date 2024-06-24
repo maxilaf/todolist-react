@@ -26,7 +26,7 @@ export default function TacheForm({ handleAdd }) {
     };
 
     return (
-        <form action="submit" onSubmit={addTaches}>
+        <form action="submit" onSubmit={addTaches} className="add">
             <input
                 value={nouvelleTache}
                 type="text"

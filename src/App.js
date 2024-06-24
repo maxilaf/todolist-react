@@ -72,7 +72,11 @@ function App() {
                                 onTacheDelete={deleteTache}
                                 // onFait={() => onNonFait(tache)}
                                 key={taches.indexOf(tache)}
-                                checkBox={<input type="checkbox" onChange={() => onNonFait(tache)} checked={false}/>  }
+                                checkBox={{
+                                    onChange: () => onNonFait(tache),
+                                    checked: false,
+                                }}
+                                estFait="tacheNonFait"
                             />
                         );
                     })}
@@ -88,7 +92,11 @@ function App() {
                                 onTacheDelete={deleteTacheFini}
                                 // onFait={() => onFait(tacheFini)}
                                 key={taches.indexOf(tacheFini)}
-                                checkBox={<input type="checkbox" onChange={() => onFait(tacheFini)} checked/>}
+                                checkBox={{
+                                    onChange: () => onFait(tacheFini),
+                                    checked: true,
+                                }}
+                                estFait="tacheFait"
                             />
                         );
                     })}
