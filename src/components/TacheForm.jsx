@@ -1,9 +1,11 @@
 
 import { useState } from "react";
+import Status from "./Status";
 
 export default function TacheForm({ handleAdd, nomPresent }) {
     // state
     const [nouvelleTache, setNouvelleTache] = useState("");
+    const [status, setStatus] =  useState("BAS");
 
     // comportements
     const handleChange = (event) => {
@@ -16,7 +18,7 @@ export default function TacheForm({ handleAdd, nomPresent }) {
         if (nomPresent(nouvelleTache)) {
             alert("Attention ! Cette tache est déja présente")
         } else if (nouvelleTache !== "") {
-            const newTache = { nom: nouvelleTache, fini: false, status: "bas" };
+            const newTache = { nom: nouvelleTache, fini: false, status: status };
             handleAdd(newTache);
             //   setTaches([...taches, newTaches]);
         }
@@ -27,14 +29,37 @@ export default function TacheForm({ handleAdd, nomPresent }) {
         // console.log(taches);
     };
 
+    const changeStatusForm = () => {
+        switch (status) {
+            case "BAS":
+                setStatus("MOYEN");
+                break;
+
+            case "MOYEN":
+                setStatus("HAUT");
+                break;
+
+            case "HAUT":
+                setStatus("BAS");
+                break;
+
+            default:
+                alert("ERREUR STATUS (Status.js l.20)");
+                break;
+        }
+    };
+
     return (
         <form action="submit" onSubmit={addTaches} className="add">
-            <input
-                value={nouvelleTache}
-                type="text"
-                placeholder="Entrez votre votre tache"
-                onChange={handleChange}
-            />
+            <div className="inputTache">
+                <input
+                    value={nouvelleTache}
+                    type="text"
+                    placeholder="Entrez votre votre tache"
+                    onChange={handleChange}
+                />
+                <Status status={status} onClick={changeStatusForm} />
+            </div>
             <button>Ajouter la tache</button>
         </form>
     );

@@ -6,18 +6,39 @@ import TacheForm from "./components/TacheForm";
 
 function App() {
     // state (état, données)
-    const [taches, setTaches] = useState([
-        { nom: "Faire à manger", fini: false, status: "bas" },
-        { nom: "Dormir", fini: false, status: "bas" },
-        { nom: "Devoirs", fini: false, status: "bas" },
+    const [taches, _setTaches] = useState([
+        { nom: "Faire à manger", fini: false, status: "BAS" },
+        { nom: "Dormir", fini: false, status: "BAS" },
+        { nom: "Devoirs", fini: false, status: "BAS" },
     ]);
 
-    const [tachesFini, setTachesFini] = useState([
-        { nom: "Laver la voiture", fini: true, status: "bas" },
+    const [tachesFini, _setTachesFini] = useState([
+        { nom: "Laver la voiture", fini: true, status: "BAS" },
     ]);
+
     //const inputRef = useRef();
 
     // comportements
+
+    const setTaches = (tableauTaches) => {
+        const copyTaches = [...tableauTaches];
+        _setTaches(trierStatus(copyTaches));
+    };
+
+    const setTachesFini = (tableauTaches) => {
+        const copyTaches = [...tableauTaches];
+        _setTachesFini(trierStatus(copyTaches));
+    };
+
+    const trierStatus = (taches) => {
+        const copyTaches = [...taches];
+        copyTaches.sort((a, b) => {
+            const ordre = ["HAUT", "MOYEN", "BAS"];
+            return ordre.indexOf(a.status) - ordre.indexOf(b.status);
+        });
+        return copyTaches;
+    };
+
     const deleteTache = (tache) => {
         const copyTaches = [...taches];
         const indexDelete = copyTaches.indexOf(tache);
@@ -33,7 +54,9 @@ function App() {
     };
 
     const handleAdd = (newTache) => {
-        setTaches([...taches, newTache]);
+        const copyTaches = [...taches];
+        const nvTab = [...copyTaches, newTache];
+        setTaches(nvTab);
     };
 
     const onFait = (tache) => {
@@ -64,10 +87,6 @@ function App() {
         setTachesFini(copyTachesFini);
     };
 
-    const changeStatus = () => {
-        console.log("ChangeStatus");
-    };
-
     const nomPresent = (newTache) => {
         const copyTaches = [...taches];
         const copyTachesFini = [...tachesFini];
@@ -81,12 +100,56 @@ function App() {
         }
     };
 
+    const changeStatusLi = (status, tache, estFait) => {
+        let copyTaches;
+        if (estFait === "tacheNonFait") {
+            copyTaches = [...taches];
+        } else if (estFait === "tacheFait") {
+            copyTaches = [...tachesFini];
+        }
+        const index = copyTaches.indexOf(tache);
+        copyTaches[index].status = status;
+        if (estFait === "tacheNonFait") {
+            setTaches(copyTaches);
+        } else if (estFait === "tacheFait") {
+            setTachesFini(copyTaches);
+        }
+    };
+
+    const changeStatus = (tache, estFait) => {
+        switch (tache.status) {
+            case "BAS":
+                changeStatusLi("MOYEN", tache, estFait);
+                break;
+
+            case "MOYEN":
+                changeStatusLi("HAUT", tache, estFait);
+                break;
+
+            case "HAUT":
+                changeStatusLi("BAS", tache, estFait);
+                break;
+
+            default:
+                alert("ERREUR STATUS (Status.js l.20)");
+                break;
+        }
+    };
+
+    const changeStatusForm = () => {
+
+    };
+
     // Affichage
 
     return (
         <div className="App">
             <h1>To Do List</h1>
-            <TacheForm handleAdd={handleAdd} nomPresent={nomPresent} />
+            <TacheForm
+                handleAdd={handleAdd}
+                nomPresent={nomPresent}
+                onClickStatus={changeStatusForm}
+            />
             <div className="aFaire taches">
                 <h2>TACHES A FAIRE</h2>
                 <ul>
@@ -102,7 +165,9 @@ function App() {
                                     checked: false,
                                 }}
                                 estFait="tacheNonFait"
-                                changeStatus={changeStatus}
+                                onClickStatus={() =>
+                                    changeStatus(tache, "tacheNonFait")
+                                }
                             />
                         );
                     })}
@@ -123,7 +188,9 @@ function App() {
                                     checked: true,
                                 }}
                                 estFait="tacheFait"
-                                changeStatus={changeStatus}
+                                onClickStatus={() =>
+                                    changeStatus(tacheFini, "tacheFait")
+                                }
                             />
                         );
                     })}

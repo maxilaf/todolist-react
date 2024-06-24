@@ -1,5 +1,6 @@
+import Status from "./Status";
 
-export default function Tache({ tache, onTacheDelete, checkBox, estFait, changeStatus}) {
+export default function Tache({ tache, onTacheDelete, checkBox, estFait, onClickStatus}) {
     // state
 
     // comportements
@@ -14,7 +15,7 @@ export default function Tache({ tache, onTacheDelete, checkBox, estFait, changeS
             />
             <label>{tache.nom}</label>
             {/* {tache.nom} */}
-            <button className="changeStatus" onClick={changeStatus}>{tache.status}</button>
+            <Status status={tache.status} onClick={onClickStatus} />
             <button className="deleteTache" onClick={() => onTacheDelete(tache)}>X</button>
         </li>
     );
