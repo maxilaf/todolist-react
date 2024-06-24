@@ -60,7 +60,7 @@ export default function TacheForm({ handleAdd, nomPresent }) {
                 />
                 <Status status={status} onClick={changeStatusForm} />
             </div>
-            <button>Ajouter la tache</button>
+            <button className="addButton">Ajouter la tache</button>
         </form>
     );
 }

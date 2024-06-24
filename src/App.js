@@ -136,10 +136,6 @@ function App() {
         }
     };
 
-    const changeStatusForm = () => {
-
-    };
-
     // Affichage
 
     return (
@@ -148,7 +144,6 @@ function App() {
             <TacheForm
                 handleAdd={handleAdd}
                 nomPresent={nomPresent}
-                onClickStatus={changeStatusForm}
             />
             <div className="aFaire taches">
                 <h2>TACHES A FAIRE</h2>

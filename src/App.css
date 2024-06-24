@@ -136,3 +136,7 @@ label {
     border-left: 2px solid black;
     border-radius: 0 100px 100px 0;
 }
+
+.add div {
+    display: flex;
+}
