@@ -7,13 +7,13 @@ import TacheForm from "./components/TacheForm";
 function App() {
     // state (état, données)
     const [taches, setTaches] = useState([
-        { nom: "Faire à manger", fini: false },
-        { nom: "Dormir", fini: false },
-        { nom: "Devoirs", fini: false },
+        { nom: "Faire à manger", fini: false, status: "bas" },
+        { nom: "Dormir", fini: false, status: "bas" },
+        { nom: "Devoirs", fini: false, status: "bas" },
     ]);
 
     const [tachesFini, setTachesFini] = useState([
-        { nom: "Laver la voiture", fini: true },
+        { nom: "Laver la voiture", fini: true, status: "bas" },
     ]);
     //const inputRef = useRef();
 
@@ -40,7 +40,11 @@ function App() {
         const copyTachesFini = [...tachesFini];
         const indexDelete = copyTachesFini.indexOf(tache);
         copyTachesFini.splice(indexDelete, 1);
-        const changeTache = { nom: tache.nom, fini: false };
+        const changeTache = {
+            nom: tache.nom,
+            fini: false,
+            status: tache.status,
+        };
         const copyTaches = [...taches, changeTache];
         setTaches(copyTaches);
         setTachesFini(copyTachesFini);
@@ -50,10 +54,31 @@ function App() {
         const copyTaches = [...taches];
         const indexDelete = copyTaches.indexOf(tache);
         copyTaches.splice(indexDelete, 1);
-        const changeTache = { nom: tache.nom, fini: true };
+        const changeTache = {
+            nom: tache.nom,
+            fini: true,
+            status: tache.status,
+        };
         const copyTachesFini = [...tachesFini, changeTache];
         setTaches(copyTaches);
         setTachesFini(copyTachesFini);
+    };
+
+    const changeStatus = () => {
+        console.log("ChangeStatus");
+    };
+
+    const nomPresent = (newTache) => {
+        const copyTaches = [...taches];
+        const copyTachesFini = [...tachesFini];
+        if (
+            copyTaches.some((tache) => tache.nom === newTache) ||
+            copyTachesFini.some((tacheFini) => tacheFini.nom === newTache)
+        ) {
+            return true;
+        } else {
+            return false;
+        }
     };
 
     // Affichage
@@ -61,7 +86,7 @@ function App() {
     return (
         <div className="App">
             <h1>To Do List</h1>
-            <TacheForm handleAdd={handleAdd} />
+            <TacheForm handleAdd={handleAdd} nomPresent={nomPresent} />
             <div className="aFaire taches">
                 <h2>TACHES A FAIRE</h2>
                 <ul>
@@ -71,12 +96,13 @@ function App() {
                                 tache={tache}
                                 onTacheDelete={deleteTache}
                                 // onFait={() => onNonFait(tache)}
-                                key={taches.indexOf(tache)}
+                                key={tache.nom}
                                 checkBox={{
                                     onChange: () => onNonFait(tache),
                                     checked: false,
                                 }}
                                 estFait="tacheNonFait"
+                                changeStatus={changeStatus}
                             />
                         );
                     })}
@@ -91,12 +117,13 @@ function App() {
                                 tache={tacheFini}
                                 onTacheDelete={deleteTacheFini}
                                 // onFait={() => onFait(tacheFini)}
-                                key={taches.indexOf(tacheFini)}
+                                key={tacheFini.nom}
                                 checkBox={{
                                     onChange: () => onFait(tacheFini),
                                     checked: true,
                                 }}
                                 estFait="tacheFait"
+                                changeStatus={changeStatus}
                             />
                         );
                     })}

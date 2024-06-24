@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 
-export default function TacheForm({ handleAdd }) {
+export default function TacheForm({ handleAdd, nomPresent }) {
     // state
     const [nouvelleTache, setNouvelleTache] = useState("");
 
@@ -13,12 +13,14 @@ export default function TacheForm({ handleAdd }) {
 
     const addTaches = (event) => {
         event.preventDefault();
-        if (nouvelleTache !== "") {
-            const newTache = { nom: nouvelleTache, fini: false };
+        if (nomPresent(nouvelleTache)) {
+            alert("Attention ! Cette tache est déja présente")
+        } else if (nouvelleTache !== "") {
+            const newTache = { nom: nouvelleTache, fini: false, status: "bas" };
             handleAdd(newTache);
             //   setTaches([...taches, newTaches]);
-            setNouvelleTache("");
         }
+        setNouvelleTache("");
         // const tachesLenght = taches.length + 1;
         // const newTaches = { id: tachesLenght, nom: inputRef.current.value };
         // setTaches([...taches, newTaches]);

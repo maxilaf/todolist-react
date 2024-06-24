@@ -1,5 +1,5 @@
 
-export default function Tache({ tache, onTacheDelete, checkBox, estFait }) {
+export default function Tache({ tache, onTacheDelete, checkBox, estFait, changeStatus}) {
     // state
 
     // comportements
@@ -14,7 +14,8 @@ export default function Tache({ tache, onTacheDelete, checkBox, estFait }) {
             />
             <label>{tache.nom}</label>
             {/* {tache.nom} */}
-            <button onClick={() => onTacheDelete(tache)}>X</button>
+            <button className="changeStatus" onClick={changeStatus}>{tache.status}</button>
+            <button className="deleteTache" onClick={() => onTacheDelete(tache)}>X</button>
         </li>
     );
 }
