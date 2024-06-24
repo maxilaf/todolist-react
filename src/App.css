@@ -64,12 +64,23 @@ button {
 }
 
 input[type="checkbox"] {
-    border-radius: 50px;
-    background-color: red;
-    color: red;
-    accent-color: #ff0019ed;
+    appearance: none;
+    -webkit-appearance: none;
+    border: 3px solid black;
+    border-radius: 100px;
     width: 30px;
     height: 30px;
+    cursor: pointer;
+}
+
+input[type="checkbox"]:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+input[type="checkbox"]:checked {
+    background-color: black;
+    cursor: pointer;
 }
 
 li button {
@@ -85,6 +96,10 @@ li button {
     border-bottom: 0;
     font-size: 20px;
     font-weight: bolder ;
+}
+
+li button:hover {
+    background-color: rgba(255, 255, 255, 0.6);
 }
 
 .tacheFait {

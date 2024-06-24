@@ -1,4 +1,3 @@
-import "./../styles/Tache.css";
 
 export default function Tache({ tache, onTacheDelete, checkBox, estFait }) {
     // state
