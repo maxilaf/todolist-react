@@ -51,13 +51,13 @@ export default function TacheForm({ handleAdd, nomPresent }) {
 
     return (
         <form action="submit" onSubmit={addTaches} className="add">
-            <div className="inputTache">
-                <input
-                    value={nouvelleTache}
-                    type="text"
-                    placeholder="Entrez votre votre tache"
-                    onChange={handleChange}
-                />
+            <input
+                value={nouvelleTache}
+                type="text"
+                placeholder="Entrez votre votre tache"
+                onChange={handleChange}
+            />
+            <div className="containerStatus">
                 <Status status={status} onClick={changeStatusForm} />
             </div>
             <button className="addButton">Ajouter la tache</button>

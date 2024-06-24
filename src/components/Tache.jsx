@@ -15,7 +15,9 @@ export default function Tache({ tache, onTacheDelete, checkBox, estFait, onClick
             />
             <label>{tache.nom}</label>
             {/* {tache.nom} */}
-            <Status status={tache.status} onClick={onClickStatus} />
+            <div className="containerStatusButton">
+                <Status status={tache.status} onClick={onClickStatus} />
+            </div>
             <button className="deleteTache" onClick={() => onTacheDelete(tache)}>X</button>
         </li>
     );
