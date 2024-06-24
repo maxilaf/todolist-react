@@ -3,18 +3,17 @@ import "./App.css";
 
 import Tache from "./components/Tache";
 import TacheForm from "./components/TacheForm";
-import TacheFini from "./components/TacheFini";
 
 function App() {
     // state (état, données)
     const [taches, setTaches] = useState([
-        { nom: "Pomme", fini: false },
-        { nom: "Ananas", fini: false },
-        { nom: "Pastèque", fini: false },
+        { nom: "Faire à manger", fini: false },
+        { nom: "Dormir", fini: false },
+        { nom: "Devoirs", fini: false },
     ]);
 
     const [tachesFini, setTachesFini] = useState([
-        { nom: "Poire", fini: true },
+        { nom: "Laver la voiture", fini: true },
     ]);
     //const inputRef = useRef();
 
@@ -73,7 +72,7 @@ function App() {
                                 onTacheDelete={deleteTache}
                                 // onFait={() => onNonFait(tache)}
                                 key={taches.indexOf(tache)}
-                                checkBox={<input type="checkbox" onChange={() => onNonFait(tache)}/>  }
+                                checkBox={<input type="checkbox" onChange={() => onNonFait(tache)} checked={false}/>  }
                             />
                         );
                     })}
