@@ -25,12 +25,18 @@ function App() {
 
     const setTaches = (tableauTaches) => {
         const copyTaches = [...tableauTaches];
-        _setTaches(trierStatus(copyTaches));
+        const tachesTrie = trierStatus(copyTaches)
+        _setTaches(tachesTrie);
+        localStorage.removeItem('Staches');
+        localStorage.setItem('Staches', JSON.stringify(tachesTrie));
     };
 
     const setTachesFini = (tableauTaches) => {
         const copyTaches = [...tableauTaches];
-        _setTachesFini(trierStatus(copyTaches));
+        const tachesTrie = trierStatus(copyTaches)
+        _setTachesFini(tachesFini);
+        localStorage.removeItem('StachesFini');
+        localStorage.setItem('StachesFini', JSON.stringify(tachesTrie));
     };
 
     const trierStatus = (taches) => {
