@@ -16,6 +16,9 @@ function App() {
         { nom: "Laver la voiture", fini: true, status: "BAS" },
     ]);
 
+    localStorage.setItem('Staches', JSON.stringify(taches));
+    localStorage.setItem('StachesFini', JSON.stringify(tachesFini));
+
     //const inputRef = useRef();
 
     // comportements
