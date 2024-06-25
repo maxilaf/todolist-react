@@ -6,18 +6,27 @@ import TacheForm from "./components/TacheForm";
 
 function App() {
     // state (état, données)
-    const [taches, _setTaches] = useState([
+    const _taches = [
         { nom: "Faire à manger", fini: false, status: "BAS" },
         { nom: "Dormir", fini: false, status: "BAS" },
         { nom: "Devoirs", fini: false, status: "BAS" },
-    ]);
+    ];
 
-    const [tachesFini, _setTachesFini] = useState([
+    const _tachesFini = [
         { nom: "Laver la voiture", fini: true, status: "BAS" },
-    ]);
+    ];
 
-    localStorage.setItem('Staches', JSON.stringify(taches));
-    localStorage.setItem('StachesFini', JSON.stringify(tachesFini));
+    if (localStorage.length === 0) {
+        localStorage.setItem('Staches', JSON.stringify(_taches));
+        localStorage.setItem('StachesFini', JSON.stringify(_tachesFini));
+    }
+
+    const [taches, _setTaches] = useState(JSON.parse(localStorage.getItem('Staches')));
+
+    const [tachesFini, _setTachesFini] = useState(JSON.parse(localStorage.getItem('StachesFini')));
+
+    // localStorage.setItem('Staches', JSON.stringify(taches));
+    // localStorage.setItem('StachesFini', JSON.stringify(tachesFini));
 
     //const inputRef = useRef();
 
@@ -26,17 +35,17 @@ function App() {
     const setTaches = (tableauTaches) => {
         const copyTaches = [...tableauTaches];
         const tachesTrie = trierStatus(copyTaches)
-        _setTaches(tachesTrie);
         localStorage.removeItem('Staches');
         localStorage.setItem('Staches', JSON.stringify(tachesTrie));
+        _setTaches(JSON.parse(localStorage.getItem('Staches')));
     };
 
     const setTachesFini = (tableauTaches) => {
         const copyTaches = [...tableauTaches];
         const tachesTrie = trierStatus(copyTaches)
-        _setTachesFini(tachesTrie);
         localStorage.removeItem('StachesFini');
         localStorage.setItem('StachesFini', JSON.stringify(tachesTrie));
+        _setTachesFini(JSON.parse(localStorage.getItem('StachesFini')));
     };
 
     const trierStatus = (taches) => {
