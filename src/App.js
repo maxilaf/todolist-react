@@ -34,7 +34,7 @@ function App() {
     const setTachesFini = (tableauTaches) => {
         const copyTaches = [...tableauTaches];
         const tachesTrie = trierStatus(copyTaches)
-        _setTachesFini(tachesFini);
+        _setTachesFini(tachesTrie);
         localStorage.removeItem('StachesFini');
         localStorage.setItem('StachesFini', JSON.stringify(tachesTrie));
     };
