@@ -7,7 +7,7 @@ export default function Status({ status, onClick }) {
     // affichage
 
     return (
-        <button className={"changeStatus " + status} onClick={onClick}>
+        <button className={"changeStatus " + status} onClick={onClick} >
             {status}
         </button>
     );

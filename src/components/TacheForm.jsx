@@ -1,11 +1,10 @@
-
 import { useState } from "react";
 import Status from "./Status";
 
 export default function TacheForm({ handleAdd, nomPresent }) {
     // state
     const [nouvelleTache, setNouvelleTache] = useState("");
-    const [status, setStatus] =  useState("BAS");
+    const [status, setStatus] = useState("BAS");
 
     // comportements
     const handleChange = (event) => {
@@ -16,10 +15,15 @@ export default function TacheForm({ handleAdd, nomPresent }) {
     const addTaches = (event) => {
         event.preventDefault();
         if (nomPresent(nouvelleTache)) {
-            alert("Attention ! Cette tache est déja présente")
+            alert("Attention ! Cette tache est déja présente");
         } else if (nouvelleTache !== "") {
-            const newTache = { nom: nouvelleTache, fini: false, status: status };
+            const newTache = {
+                nom: nouvelleTache,
+                fini: false,
+                status: status,
+            };
             handleAdd(newTache);
+            setStatus("BAS");
             //   setTaches([...taches, newTaches]);
         }
         setNouvelleTache("");
@@ -29,7 +33,8 @@ export default function TacheForm({ handleAdd, nomPresent }) {
         // console.log(taches);
     };
 
-    const changeStatusForm = () => {
+    const changeStatusForm = (event) => {
+        event.preventDefault();
         switch (status) {
             case "BAS":
                 setStatus("MOYEN");
@@ -60,7 +65,9 @@ export default function TacheForm({ handleAdd, nomPresent }) {
             <div className="containerStatus">
                 <Status status={status} onClick={changeStatusForm} />
             </div>
-            <button className="addButton">Ajouter la tache</button>
+            <button className="addButton" type="submit">
+                Ajouter la tache
+            </button>
         </form>
     );
 }
