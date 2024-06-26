@@ -14,13 +14,15 @@ const [chiffre, setChiffre] = useState(null);
     // Fonction pour récupérer les données
     const fetchData = () => {
         // Appel à la route /api/data
-        axios.get('http://127.0.0.1:5000/api/chiffre')
-            .then(response => {
-                setChiffre(response.data);
-        })
-            .catch(error => {
-                console.error('Erreur lors de la récupération des données:', error);
-        });
+        fetch("http://127.0.0.1:5000/api/chiffre")
+            .then((response) => response.json())
+            .then((data) => setChiffre(data))
+            .catch((error) => {
+                alert(
+                    "Erreur lors de la récupération des données:",
+                    error
+                );
+            });
 
         axios.get('http://127.0.0.1:5000/api/nom')
             .then(response => {
